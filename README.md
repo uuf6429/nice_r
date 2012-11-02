@@ -22,6 +22,11 @@ The following example loads `nice_r.php` and prints out PHP's `$_SERVER` variabl
 		?></body>
 	</html>
 
+Screenshot
+----------
+
+![Screenshot](http://i.stack.imgur.com/VnUuV.png)
+
 Report Issues/Bugs
 ------------------
 [Bugs](https://github.com/uuf6429/nice_r/issues)
