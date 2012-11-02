@@ -1,7 +1,7 @@
 nice_r()
 ========
 
-A nicer replacement for PHP's print_r().
+A nicer replacement for PHP's print_r(). Works with (at least) PHP 5.2 (tested).
 
 Usage
 -----
