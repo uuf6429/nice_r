@@ -9,7 +9,7 @@ Usage
 The following example loads `nice_r.php` and prints out PHP's `$_SERVER` variable.
 
 ```php
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 	<head>
 		<link rel="stylesheet" type="text/css" href="nice_r.css?version=<?php echo filemtime('src/nice_r/nice_r.css'); ?>"/>
