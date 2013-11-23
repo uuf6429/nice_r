@@ -6,7 +6,10 @@ A nicer replacement for PHP's print_r(). Works with (at least) PHP 5.2 (tested).
 Usage
 -----
 
-The following example loads `nice_r.php` and prints out PHP's `$_SERVER` variable.
+Following a recent rewrite, this library has been converted into a class.
+However, an adapter is available for calling the library the old way.
+
+The following example shows how one prints out PHP's `$GLOBALS` variable.
 
 ```php
 ?><!DOCTYPE html>
@@ -16,9 +19,15 @@ The following example loads `nice_r.php` and prints out PHP's `$_SERVER` variabl
 		<script type="text/javascript" src="nice_r.js?version=<?php echo filemtime('src/nice_r/nice_r.js'); ?>"></script>
 	</head><body><?php
 
-		require_once('nice_r.php');
+		require('Nicer.php');
 
-		nice_r($_SERVER);
+		// oop way (reccomended)
+		$n = new Nicer($GLOBALS);
+		$n->render();
+		
+		// procedural way (requires nice_r.php)
+		require('nice_r.php');
+		nice_r($GLOBALS);
 
 	?></body>
 </html>
