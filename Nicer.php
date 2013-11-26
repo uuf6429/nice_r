@@ -170,7 +170,7 @@
 			
 			$cls = $this->css_class;
 			$xcls = !$is_hash ? $cls.'_ad' : '';
-			$html .= '<a href="javascript:;" onclick="'.$this->js_func.'(\''.$this->html_id.'\',\''.$id.'\');">';
+			$html  = '<a href="javascript:;" onclick="'.$this->js_func.'(\''.$this->html_id.'\',\''.$id.'\');">';
 			$html .= '	<span class="'.$cls.'_a '.$xcls.'" id="'.$this->html_id.'_a'.$id.'">&#9658;</span>';
 			$html .= '	<span class="'.$cls.'_k">'.$this->_esc_html($key).'</span>';
 			$html .= '	<span class="'.$cls.'_d">(<span>'.ucwords($t).'</span>'.$d.')</span>';
@@ -178,7 +178,7 @@
 			$html .= '</a>';
 			
 			if($is_hash){
-				$this->_generate_value($val, $cls.'_v', $this->html_id.'_v'.$id);
+				$html .= $this->_generate_value($val, $cls.'_v', $this->html_id.'_v'.$id);
 			}
 			
 			return $html;
