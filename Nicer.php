@@ -49,80 +49,14 @@
 		 * @return string Generated HTML.
 		 */
 		public function generate(){
-			ob_start();
-			$this->render();
-			return ob_get_clean();
+			return $this->_generate_value($this->value, $this->css_class);
 		}
 		
 		/**
 		 * Renders the inspector HTML directly to the browser.
 		 */
 		public function render(){
-			$this->_render_value($this->value, $this->css_class);
-		}
-		
-		/**
-		 * Render a single particular value.
-		 * @param mixed $var The value to render
-		 * @param string $class Parent CSS class.
-		 * @param string $id Item HTML id.
-		 */
-		protected function _render_value($var, $class = '', $id = ''){
-			$BEENTHERE = self::$BEEN_THERE;
-			$class .= ' '.$this->css_class.'_t_'.gettype($var);
-			
-			?><div id="<?php echo $id; ?>" class="<?php echo $class; ?>"><?php
-			
-				switch(true){
-					
-					// handle arrays
-					case is_array($var):
-						if(isset($var[$BEENTHERE])){
-							?><span class="<?php echo $this->css_class; ?>_ir">Infinite Recursion Detected!</span><?php
-						}else{
-							$var[$BEENTHERE] = true;
-							$has_subitems = false;
-							foreach($var as $k=>$v){
-								if($k!==$BEENTHERE){
-									$this->_render_keyvalue($k, $v);
-									$has_subitems = true;
-								}
-							}
-							if(!$has_subitems){
-								?><span class="<?php echo $this->css_class; ?>_ni">Empty Array</span><?php
-							}
-							unset($var[$BEENTHERE]);
-						}
-						break;
-					
-					// handle objects
-					case is_object($var):
-						if(isset($var->$BEENTHERE)){
-							?><span class="<?php echo $this->css_class; ?>_ir">Infinite Recursion Detected!</span><?php
-						}else{
-							$var->$BEENTHERE = true;
-							$has_subitems = false;
-							foreach((array)$var as $k=>$v){
-								if($k!==$BEENTHERE){
-									$this->_render_keyvalue($k, $v);
-									$has_subitems = true;
-								}
-							}
-							if(!$has_subitems){
-								?><span class="<?php echo $this->css_class; ?>_ni">No Properties</span><?php
-							}
-							unset($var->$BEENTHERE);
-						}
-						break;
-					
-					// handle simple types
-					default:
-						$this->_render_keyvalue('', $var);
-						break;
-				}
-				
-			?></div><?php
-			
+			echo $this->generate();
 		}
 
 		/**
@@ -135,14 +69,79 @@
 		}
 		
 		/**
+		 * Render a single particular value.
+		 * @param mixed $var The value to render
+		 * @param string $class Parent CSS class.
+		 * @param string $id Item HTML id.
+		 */
+		protected function _generate_value($var, $class = '', $id = ''){
+			$BEENTHERE = self::$BEEN_THERE;
+			$class .= ' '.$this->css_class.'_t_'.gettype($var);
+			
+			$html = '<div id="'.$id.'" class="'.$class.'">';
+			
+			switch(true){
+
+				// handle arrays
+				case is_array($var):
+					if(isset($var[$BEENTHERE])){
+						$html .= '<span class="'.$this->css_class.'_ir">Infinite Recursion Detected!</span>';
+					}else{
+						$var[$BEENTHERE] = true;
+						$has_subitems = false;
+						foreach($var as $k=>$v){
+							if($k!==$BEENTHERE){
+								$html .= $this->_generate_keyvalue($k, $v);
+								$has_subitems = true;
+							}
+						}
+						if(!$has_subitems){
+							$html .= '<span class="'.$this->css_class.'_ni">Empty Array</span>';
+						}
+						unset($var[$BEENTHERE]);
+					}
+					break;
+
+				// handle objects
+				case is_object($var):
+					if(isset($var->$BEENTHERE)){
+						$html .= '<span class="'.$this->css_class.'_ir">Infinite Recursion Detected!</span>';
+					}else{
+						$var->$BEENTHERE = true;
+						$has_subitems = false;
+						foreach((array)$var as $k=>$v){
+							if($k!==$BEENTHERE){
+								$html .= $this->_generate_keyvalue($k, $v);
+								$has_subitems = true;
+							}
+						}
+						if(!$has_subitems){
+							$html .= '<span class="'.$this->css_class.'_ni">No Properties</span>';
+						}
+						unset($var->$BEENTHERE);
+					}
+					break;
+
+				// handle simple types
+				default:
+					$html .= $this->_generate_keyvalue('', $var);
+					break;
+			}
+				
+			return $html . '</div>';
+		}
+		
+		/**
 		 * Render a key-value pair.
 		 * @staticvar int $id Specifies element id.
 		 * @param string $key Key name.
 		 * @param mixed $val Key value.
 		 */
-		function _render_keyvalue($key, $val){
-			static $id = 0; $id++;
-			$p = ''; $d = ''; $t = gettype($val);
+		protected function _generate_keyvalue($key, $val){
+			static $id = 0; $id++;  // unique (per rquest) id
+			$p = '';                // preview
+			$d = '';                // description
+			$t = gettype($val);     // get data type 
 			$is_hash = ($t=='array') || ($t=='object');
 			
 			switch($t){
@@ -171,16 +170,17 @@
 			
 			$cls = $this->css_class;
 			$xcls = !$is_hash ? $cls.'_ad' : '';
-			?><a href="javascript:;" onclick="<?php echo $this->js_func; ?>('<?php echo $this->html_id; ?>','<?php echo $id; ?>');">
-				<span class="<?php echo "{$cls}_a $xcls"; ?>" id="<?php echo "{$this->html_id}_a$id"; ?>">&#9658;</span>
-				<span class="<?php echo "{$cls}_k"; ?>"><?php echo $this->_esc_html($key); ?></span>
-				<span class="<?php echo "{$cls}_d"; ?>">(<?php echo '<span>'.ucwords($t).'</span>'.$d; ?>)</span>
-				<span class="<?php echo "{$cls}_p {$cls}_t_$t"; ?>"><?php echo $this->_esc_html($p); ?></span>
-			</a><?php
+			$html .= '<a href="javascript:;" onclick="'.$this->js_func.'(\''.$this->html_id.'\',\''.$id.'\');">';
+			$html .= '	<span class="'.$cls.'_a '.$xcls.'" id="'.$this->html_id.'_a'.$id.'">&#9658;</span>';
+			$html .= '	<span class="'.$cls.'_k">'.$this->_esc_html($key).'</span>';
+			$html .= '	<span class="'.$cls.'_d">(<span>'.ucwords($t).'</span>'.$d.')</span>';
+			$html .= '	<span class="'.$cls.'_p '.$cls.'_t_'.$t.'">'.$this->_esc_html($p).'</span>';
+			$html .= '</a>';
 			
 			if($is_hash){
-				$this->_render_value($val, $cls.'_v', $this->html_id.'_v'.$id);
+				$this->_generate_value($val, $cls.'_v', $this->html_id.'_v'.$id);
 			}
 			
+			return $html;
 		}
 	}
