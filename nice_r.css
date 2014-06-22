@@ -1,5 +1,6 @@
 .nice_r {
 	font: 12px Consolas, "Lucida Console", monospace;
+	cursor: default;
 }
 
 .nice_r a {
@@ -70,5 +71,22 @@
 }
 
 .nice_r_p.nice_r_t_boolean {
+	color: #00E;
+}
+
+.nice_r_t_comment {
+	color: #080;
+}
+
+.nice_r a.nice_r_c .nice_r_k {
+	color: #909;
+}
+
+.nice_r a.nice_r_c .nice_r_ma {
+	font-weight: normal;
+	color: #777;
+}
+
+.nice_r a.nice_r_c .nice_r_mv {
 	color: #00E;
 }
