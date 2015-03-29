@@ -233,6 +233,26 @@ class Nicer {
 		
 		return $html;
 	}
+    
+    protected function _format_phpdoc($doc){
+        $doc = $this->_esc_html($doc);
+        
+        // fix indentation
+        $doc = preg_replace('/(\\n)\\s+?\\*([\\s\\/])/', '$1 *$2', $doc);
+        
+        // doc attribs
+        $doc = preg_replace('/(\\s)(@\\w+)/', '$1<b>$2</b>', $doc);
+        
+        // simple formatting
+        $doc = nl2br(str_replace(' ', '&nbsp;', $doc));
+        
+        // linkify...links
+        $doc = preg_replace('/(((f|ht){1}tp:\\/\\/)[-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]+)/', '<a href="$1">$1</a>', $doc);
+        $doc = preg_replace('/(www\\.[-a-zA-Z0-9@:%_\\+.~#?&\\/=]+)/', '<a href="http://$1">$1</a>', $doc);
+        $doc = preg_replace('/([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})/', '<a href="mailto:$1">$1</a>', $doc);
+        
+        return $doc;
+    }
 	
     protected $visible_mods = array('abstract', 'final', 'private', 'protected', 'public', 'static');
     
@@ -303,7 +323,7 @@ class Nicer {
 		
 		if($doc){
 			$html .= '<div id="' . $this->html_id . '_v' . $id . '" class="nice_r_v ' . $this->css_class . '_t_comment">';
-			$html .= nl2br(str_replace(' ', '&nbsp;', $this->_esc_html($doc)));
+			$html .= $this->_format_phpdoc($doc);
 			$html .= '</div>';
 		}
 		

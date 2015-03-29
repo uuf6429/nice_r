@@ -3,7 +3,7 @@
     cursor: default;
 }
 
-.nice_r a {
+.nice_r_c {
     display: block;
     text-decoration: none;
     color: #222;
@@ -15,12 +15,12 @@
     text-overflow: ellipsis;
 }
 
-.nice_r a:hover .nice_r_k,
-.nice_r a:hover .nice_r_d,
-.nice_r a:hover .nice_r_d span,
-.nice_r a:hover .nice_r_p,
-.nice_r a:hover .nice_r_a,
-.nice_r a:hover {
+a.nice_r_c:hover .nice_r_k,
+a.nice_r_c:hover .nice_r_d,
+a.nice_r_c:hover .nice_r_d span,
+a.nice_r_c:hover .nice_r_p,
+a.nice_r_c:hover .nice_r_a,
+a.nice_r_c:hover {
     background-color: Highlight;
     color: HighlightText;
 }
@@ -104,7 +104,7 @@
 
 a.nice_r_c.nice_r_m_constructor .nice_r_k,
 a.nice_r_c.nice_r_m_destructor .nice_r_k {
-    color: #080;
+    color: #C02;
 }
 
 .nice_r_m_magic {
