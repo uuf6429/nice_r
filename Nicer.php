@@ -289,9 +289,9 @@ class Nicer
 		}
 		
 		$cls = $this->css_class;
-		$xcls = !$is_hash ? ($cls . '_ad') : '';
-		$html  = '<a ' . ($is_hash ? 'href="javascript:;"' : '') . ' onclick="' . $this->js_func . '(\'' . $this->html_id . '\',\'' . $id . '\');">';
-		$html .= '	<span class="' . $cls . '_a ' . $xcls . '" id="' . $this->html_id . '_a' . $id . '">&#9658;</span>';
+		$xcls = !$is_hash ? (' ' . $cls . '_ad') : '';
+		$html  = '<a class="' . $cls . '_c ' . $xcls . '" ' . ($is_hash ? 'href="javascript:;"' : '') . ' onclick="' . $this->js_func . '(\'' . $this->html_id . '\',\'' . $id . '\');">';
+		$html .= '	<span class="' . $cls . '_a" id="' . $this->html_id . '_a' . $id . '">&#9658;</span>';
 		$html .= '	<span class="' . $cls . '_k">' . $this->_esc_html($key) . '</span>';
 		$html .= '	<span class="' . $cls . '_d">(<span>' . ucwords($t) . '</span>' . $d . ')</span>';
 		$html .= '	<span class="' . $cls . '_p ' . $cls . '_t_' . $t . '">' . $this->_esc_html($p) . '</span>';
@@ -344,7 +344,7 @@ class Nicer
 			{
 				$ref = new ReflectionMethod($context, $callback);
 				
-				foreach(array(
+				foreach (array(
 					'abstract'      => $ref->isAbstract(),
 					'constructor'   => $ref->isConstructor(),
 					'deprecated'    => $ref->isDeprecated(),
@@ -398,13 +398,13 @@ class Nicer
 			$prms = array('???');
 		}
 		
-		$xcls = !$doc ? $cls . '_ad' : '';
+		$xcls = !$doc ? (' ' . $cls . '_ad') : '';
 		
 		$hmod = implode(' ', array_intersect($mods, $this->_visible_mods));
 		foreach ($mods as $mod) $xcls .= ' nice_r_m_' . $mod;
-		if ($hmod != '') $hmod = '<span class="nice_r_m">' . $hmod . '</span> ';
+		if ($hmod != '') $hmod = '<span class="nice_r_mo">' . $hmod . '</span> ';
 		
-		$html  = '<a class="' . $cls . '_c ' . $xcls . '" ' . ($doc ? 'href="javascript:;"' : '') . ' onclick="' . $this->js_func . '(\'' . $this->html_id . '\',\'' . $id . '\');">';
+		$html  = '<a class="' . $cls . '_c ' . $cls . '_m' . $xcls . '" ' . ($doc ? 'href="javascript:;"' : '') . ' onclick="' . $this->js_func . '(\'' . $this->html_id . '\',\'' . $id . '\');">';
 		$html .= '	<span class="' . $cls . '_a" id="' . $this->html_id . '_a' . $id . '">&#9658;</span>';
 		$html .= '	<span class="' . $cls . '_k">' . $hmod . $this->_esc_html($name) . '<span class="' . $cls . '_ma">(<span>' . implode(', ', $prms) . '</span>)</span></span>';
 		$html .= '</a>';

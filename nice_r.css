@@ -3,7 +3,7 @@
     cursor: default;
 }
 
-.nice_r_c {
+.nice_r .nice_r_c {
     display: block;
     text-decoration: none;
     color: #222;
@@ -15,102 +15,102 @@
     text-overflow: ellipsis;
 }
 
-a.nice_r_c:hover .nice_r_k,
-a.nice_r_c:hover .nice_r_d,
-a.nice_r_c:hover .nice_r_d span,
-a.nice_r_c:hover .nice_r_p,
-a.nice_r_c:hover .nice_r_a,
-a.nice_r_c:hover {
+.nice_r a.nice_r_c:hover .nice_r_k,
+.nice_r a.nice_r_c:hover .nice_r_d,
+.nice_r a.nice_r_c:hover .nice_r_d span,
+.nice_r a.nice_r_c:hover .nice_r_p,
+.nice_r a.nice_r_c:hover .nice_r_a,
+.nice_r a.nice_r_c:hover {
     background-color: Highlight;
     color: HighlightText;
 }
 
-.nice_r_a {
+.nice_r .nice_r_a {
     color: #000;
 }
 
-.nice_r_ad .nice_r_a {
-    opacity: 0.5;
+.nice_r .nice_r_ad .nice_r_a {
+    opacity: 0.4;
 }
 
-.nice_r_k {
+.nice_r .nice_r_k {
     color: #060;
     font-weight: bold;
 }
 
-.nice_r_d {
+.nice_r .nice_r_d {
     font-size: 11px;
     color: #777;
 }
 
-.nice_r_d span {
+.nice_r .nice_r_d span {
     color: #333;
 }
 
-.nice_r_p {
+.nice_r .nice_r_p {
     color: #000;
     font-weight: bold;
 }
 
-.nice_r_v {
+.nice_r .nice_r_v {
     margin-left: 6px;
     padding-left: 6px;
     border-left: 1px dotted #CCC;
     display: none;
 }
 
-.nice_r_ir {
+.nice_r .nice_r_ir {
     font-style: italic;
 }
 
-.nice_r_p.nice_r_t_integer,
-.nice_r_p.nice_r_t_double {
+.nice_r .nice_r_p.nice_r_t_integer,
+.nice_r .nice_r_p.nice_r_t_double {
     color: #F0E;
 }
 
-.nice_r_p.nice_r_t_string {
+.nice_r .nice_r_p.nice_r_t_string {
     color: #E00;
 }
 
-.nice_r_p.nice_r_t_boolean {
+.nice_r .nice_r_p.nice_r_t_boolean {
     color: #00E;
 }
 
-.nice_r_t_comment {
+.nice_r .nice_r_t_comment {
     color: #080;
 }
 
-.nice_r a.nice_r_c .nice_r_k {
+.nice_r .nice_r_m .nice_r_k {
     color: #909;
 }
 
-.nice_r a.nice_r_c .nice_r_ma {
+.nice_r .nice_r_m .nice_r_ma {
     font-weight: normal;
     color: #777;
 }
 
-.nice_r a.nice_r_c .nice_r_mv {
+.nice_r .nice_r_m .nice_r_mv {
     color: #00E;
 }
 
-.nice_r_m_public .nice_r_m,
-.nice_r_m_protected .nice_r_m,
-.nice_r_m_private .nice_r_m,
-.nice_r_m_abstract .nice_r_m,
-.nice_r_m_final .nice_r_m {
+.nice_r .nice_r_m_public .nice_r_mo,
+.nice_r .nice_r_m_protected .nice_r_mo,
+.nice_r .nice_r_m_private .nice_r_mo,
+.nice_r .nice_r_m_abstract .nice_r_mo,
+.nice_r .nice_r_m_final .nice_r_mo {
     font-weight: normal;
     color: #008;
 }
 
-a.nice_r_c.nice_r_m_constructor .nice_r_k,
-a.nice_r_c.nice_r_m_destructor .nice_r_k {
+.nice_r a.nice_r_c.nice_r_m_constructor .nice_r_k,
+.nice_r a.nice_r_c.nice_r_m_destructor .nice_r_k {
     color: #C02;
 }
 
-.nice_r_m_magic {
+.nice_r .nice_r_m_magic {
     font-style: italic;
 }
 
-.nice_r_m_deprecated {
+.nice_r .nice_r_m_deprecated {
     text-decoration: line-through;
 }
