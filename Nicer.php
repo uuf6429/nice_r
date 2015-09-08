@@ -11,7 +11,6 @@
  */
 class Nicer
 {
-	
 	#region Properties & Constants
 	
 	protected $value;
@@ -195,7 +194,6 @@ class Nicer
 		
 		switch (true)
 		{
-
 			// handle arrays
 			case is_array($var):
 				if (isset($var[$BEENTHERE]))
