@@ -122,12 +122,12 @@ class Nicer
     {
         return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
     }
-	
-    protected function _inspect_array(&$html, &$var)
+
+    protected function _generate_keyvalues($array, &$html)
     {
         $has_subitems = false;
 		
-        foreach ($var as $k => $v)
+        foreach ($array as $k => $v)
         {
             if ($k !== self::$BEEN_THERE)
             {
@@ -135,8 +135,14 @@ class Nicer
                 $has_subitems = true;
             }
         }
-		
-        if (!$has_subitems)
+
+        return $has_subitems;
+    }
+	
+    protected function _inspect_array(&$html, &$var)
+    {
+        // render items
+        if (!$this->_generate_keyvalues($var, $html))
         {
             $html .= '<span class="' . $this->css_class . '_ni">' . $this->STR_EMPTY_ARRAY . '</span>';
         }
@@ -145,18 +151,7 @@ class Nicer
     protected function _inspect_object(&$html, &$var)
     {
         // render properties
-        $has_subitems = false;
-		
-        foreach ((array)$var as $k => $v)
-        {
-            if ($k !== self::$BEEN_THERE)
-            {
-                $html .= $this->_generate_keyvalue($k, $v);
-                $has_subitems = true;
-            }
-        }
-		
-        if (!$has_subitems)
+        if (!$this->_generate_keyvalues((array)$var, $html))
         {
             $html .= '<span class="' . $this->css_class . '_ni">' . $this->STR_NO_PROPERTIES . '</span>';
         }
@@ -357,9 +352,9 @@ class Nicer
                     'returnsRef'    => $ref->returnsReference(),
                     'inherited'     => get_class($context) !== $ref->getDeclaringClass()->name,
                     // TODO Figure out whether this method is overriding a parent or not
-                    //'overriden'   => ($pcl = (new ReflectionClass($context))->getParentClass())
-                    //              && ($pmr = $pcl->getMethod($ref->name))
-                    //              && ($pmr->getDeclaringClass()->name === $ref->getDeclaringClass()->name),
+                    // TODO 'overriden'   => ($pcl = (new ReflectionClass($context))->getParentClass())
+                    // TODO               && ($pmr = $pcl->getMethod($ref->name))
+                    // TODO               && ($pmr->getDeclaringClass()->name === $ref->getDeclaringClass()->name),
                 ) as $name => $cond)
                     if ($cond)
                         $mods[] = $name;
