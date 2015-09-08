@@ -9,7 +9,7 @@
  * @return string If $return is true, the rendered HTML otherwise null.
  */
 function nice_r($value, $return = false){
-	$n = new Nicer($value);
-	return $return ? $n->generate() : $n->render();
+    $n = new Nicer($value);
+    return $return ? $n->generate() : $n->render();
 }
-	
+    
