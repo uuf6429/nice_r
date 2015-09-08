@@ -1,6 +1,8 @@
 nice_r()
 ========
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/uuf6429/nice_r/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/uuf6429/nice_r/?branch=master)
+
 A nicer replacement for PHP's print_r(). Works with (at least) PHP 5.2 (tested).
 
 Usage
