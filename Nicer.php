@@ -352,9 +352,6 @@ class Nicer
                     'returnsRef'    => $ref->returnsReference(),
                     'inherited'     => get_class($context) !== $ref->getDeclaringClass()->name,
                     // TODO Figure out whether this method is overriding a parent or not
-                    // TODO 'overriden'   => ($pcl = (new ReflectionClass($context))->getParentClass())
-                    // TODO               && ($pmr = $pcl->getMethod($ref->name))
-                    // TODO               && ($pmr->getDeclaringClass()->name === $ref->getDeclaringClass()->name),
                 ) as $name => $cond)
                     if ($cond)
                         $mods[] = $name;
