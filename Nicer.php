@@ -151,7 +151,7 @@ class Nicer
     protected function _inspect_object(&$html, &$var)
     {
         // render properties
-        if (!$this->_generate_keyvalues((array)$var, $html))
+        if (!$this->_generate_keyvalues((array) $var, $html))
         {
             $html .= '<span class="' . $this->css_class . '_ni">' . $this->STR_NO_PROPERTIES . '</span>';
         }
@@ -161,7 +161,7 @@ class Nicer
         {
             $has_subitems = false;
 			
-            foreach ((array)get_class_methods($var) as $method)
+            foreach ((array) get_class_methods($var) as $method)
             {
                 $html .= $this->_generate_callable($var, $method);
                 $has_subitems = true;
@@ -246,12 +246,12 @@ class Nicer
     protected function _generate_keyvalue($key, $val)
     {
         $id = $this->_generate_dropid();
-        $p = '';                // preview
-        $d = '';                // description
-        $t = gettype($val);     // get data type 
-        $is_hash = ($t=='array') || ($t=='object');
+        $p = ''; // preview
+        $d = ''; // description
+        $t = gettype($val); // get data type 
+        $is_hash = ($t == 'array') || ($t == 'object');
 		
-        switch($t)
+        switch ($t)
         {
             case 'boolean':
                 $p = $val ? 'TRUE' : 'FALSE';
@@ -259,7 +259,7 @@ class Nicer
 			
             case 'integer':
             case 'double':
-                $p = (string)$val;
+                $p = (string) $val;
                 break;
 			
             case 'string':
@@ -269,7 +269,7 @@ class Nicer
 			
             case 'resource':
                 $d .= ', ' . sprintf($this->STR_RES_DESC, get_resource_type($val));
-                $p = (string)$val;
+                $p = (string) $val;
                 break;
 			
             case 'array':
@@ -368,7 +368,7 @@ class Nicer
         {
             $doc = $ref->getDocComment();
             $prms = array();
-            foreach($ref->getParameters() as $p){
+            foreach ($ref->getParameters() as $p) {
                 $prms[] = '$' . $p->getName() . (
                     $p->isDefaultValueAvailable()
                     ? (
